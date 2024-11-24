@@ -1,0 +1,66 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+class Student
+{
+    public int Id { get; set; }
+    public string Name { get; set; }
+    public int Age { get; set; }
+}
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        // Tạo danh sách học sinh
+        List<Student> students = new List<Student>
+        {
+            new Student { Id = 1, Name = "An", Age = 16 },
+            new Student { Id = 2, Name = "Binh", Age = 14 },
+            new Student { Id = 3, Name = "Anh", Age = 17 },
+            new Student { Id = 4, Name = "Cuong", Age = 15 },
+            new Student { Id = 5, Name = "Dung", Age = 18 }
+        };
+
+        // a. IN DANH SACH TOAN BO HS
+        Console.WriteLine("DANH SACH TOAN BO HS:");
+        foreach (var student in students)
+        {
+            Console.WriteLine($"ID: {student.Id}, Name: {student.Name}, Age: {student.Age}");
+        }
+
+        // b. TIM DANH SACH HS CO TUOI TU 15-18
+        Console.WriteLine("\nDANH SACH HS CO TUOI TU 15-18:");
+        var ageFilter = students.Where(s => s.Age >= 15 && s.Age <= 18);
+        foreach (var student in ageFilter)
+        {
+            Console.WriteLine($"ID: {student.Id}, Name: {student.Name}, Age: {student.Age}");
+        }
+
+        // c. TIM HOC SINH CO TEN BAT DAU BANG CHU  "A"
+        Console.WriteLine("\nHOC SINH CO TEN BAT DAU BANG CHU'A':");
+        var nameFilter = students.Where(s => s.Name.StartsWith("A"));
+        foreach (var student in nameFilter)
+        {
+            Console.WriteLine($"ID: {student.Id}, Name: {student.Name}, Age: {student.Age}");
+        }
+
+        // d. TINH TONG TUOI TAT CA HOC SINH 
+        int totalAge = students.Sum(s => s.Age);
+        Console.WriteLine($"\nTONG TUOI TAT CA HOC SINH : {totalAge}");
+
+        // e. TIM HOC SINH CO TUOI LON NHAT 
+        int maxAge = students.Max(s => s.Age);
+        var oldestStudent = students.First(s => s.Age == maxAge);
+        Console.WriteLine($"\nHOC SINH CO TUOI LON NHAT: ID: {oldestStudent.Id}, Name: {oldestStudent.Name}, Age: {oldestStudent.Age}");
+
+        // f. SAP XEP HOC SINH CO TUOI TANG DAN 
+        Console.WriteLine("\nHOC SINH CO TUOI TANG DAN :");
+        var sortedStudents = students.OrderBy(s => s.Age);
+        foreach (var student in sortedStudents)
+        {
+            Console.WriteLine($"ID: {student.Id}, Name: {student.Name}, Age: {student.Age}");
+        }
+    }
+}
